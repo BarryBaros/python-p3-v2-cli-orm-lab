@@ -103,7 +103,34 @@ def create_employee():
 
 
 def update_employee():
-    pass
+    try:
+        
+        employee_id = int(input("Enter the employee's id: "))
+        employee = Employee.find_by_id(employee_id)
+
+        
+        if employee:
+            try:
+               
+                name = input("Enter the employee's new name: ")
+                job_title = input("Enter the employee's new job title: ")
+                department_id = int(input("Enter the employee's new department id: "))
+
+                employee.name = name
+                employee.job_title = job_title
+                employee.department_id = department_id
+                employee.update()
+
+                print(f"Success: {employee}")
+            except Exception as exc:
+                print("Error updating employee: ", exc)
+        else:
+            print(f"Employee {employee_id} not found")
+    except ValueError:
+        print("Error: Employee ID and Department ID must be integers.")
+    except Exception as e:
+        print("An error occurred: ", e)
+
 
 
 def delete_employee():
