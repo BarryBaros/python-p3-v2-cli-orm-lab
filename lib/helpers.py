@@ -143,4 +143,24 @@ def delete_employee():
 
 
 def list_department_employees():
-    pass
+    try:
+        department_id = int(input("Enter the department's id: "))
+        department = Department.find_by_id(department_id)
+        
+        if department:
+            employees = Employee.get_all()
+            department_employees = [emp for emp in employees if emp.department_id == department_id]
+            
+            if department_employees:
+                print(f"Employees in Department {department_id} ({department.name}):")
+                for emp in department_employees:
+                    print(emp)
+            else:
+                print(f"No employees found in department {department_id}.")
+        else:
+            print(f"Department with ID {department_id} not found.")
+    
+    except ValueError:
+        print("Error: Department ID must be an integer.")
+    except Exception as exc:
+        print("An error occurred: ", exc)
