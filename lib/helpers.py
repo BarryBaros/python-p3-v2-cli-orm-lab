@@ -86,7 +86,20 @@ def find_employee_by_id():
 
 
 def create_employee():
-    pass
+    name = input("Enter the employee's name: ")
+    job_title = input("Enter the job title: ")
+    try:
+        department_id = int(input("Enter the department's id: "))
+        if Department.find_by_id(department_id):
+            employee = Employee.create(name, job_title, department_id)
+            print(f'Success: {employee}')
+        else:
+            print(f"Error: Department ID {department_id} does not exist.")
+    except ValueError:
+        print("Error: Department ID must be an integer.")
+    except Exception as exc:
+        print("Error creating employee: ", exc)
+
 
 
 def update_employee():
