@@ -74,7 +74,9 @@ def list_employees():
 
 
 def find_employee_by_name():
-    pass
+    name = input("Enter the employee's name: ")
+    employee = Employee.find_by_name(name)
+    print(employee) if employee else print(f'{name}: not our employee.')
 
 
 def find_employee_by_id():
